@@ -3,6 +3,7 @@
 #include "catch2/catch.hpp"
 
 #include "array/vector.hpp"
+#include <string>
 
 using dsac::array::Vector;
 
