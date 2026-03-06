@@ -123,24 +123,24 @@ public:
     // called by other functions to reduce cap by half 
     // when sz <= cap/4 
     void shrink() {
-        if (sz > cap / 4) {
-            return;
+        if (cap <= 1) {
+            return; // don't shrink if capacity is already 1 or less
+        }
+
+        if (sz > cap / 4)  {
+            return; // no need to shrink if size is greater than cap/4
         }
 
         int new_cap = cap / 2;
+        if (new_cap < 1) new_cap = 1;
 
         T* new_data = new T[new_cap];
-
-        for (int i = 0; i < sz; i++) {
-            new_data[i] = data[i];
-        }
+        for (int i = 0; i < sz; i++) new_data[i] = data[i];
 
         delete[] data;
-
         data = new_data;
         cap = new_cap;
-        
-    };
+}
 
     // insert at end
     void push_back(const T& elem) {
